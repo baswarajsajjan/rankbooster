@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>RankBoost — SEO, AI Tools & Growth for Indian Businesses</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#F5A623;--gold2:#FFD580;--dark:#080810;--card:#0F0F1A;
+  --card2:#13131F;--border:#1A1A2E;--border2:#252540;
+  --text:#F0F0FF;--muted:#8888AA;--accent:#5B8DEF;--green:#00D68F;
+  --wa:#25D366;--red:#FF4D6A;--purple:#8B5CF6;
+  --font-h:'Clash Display',sans-serif;--font-b:'Satoshi',sans-serif
+}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--text);font-family:var(--font-b);font-size:16px;line-height:1.65;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+
+/* ── NOISE OVERLAY ── */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.5}
+
+/* ── NAV ── */
+nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 5%;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(8,8,16,0.92);backdrop-filter:blur(20px);z-index:200}
+.logo{font-family:var(--font-h);font-size:1.5rem;font-weight:700;letter-spacing:-0.5px;display:flex;align-items:center;gap:8px}
+.logo-icon{width:32px;height:32px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;gap:1.8rem;font-size:0.88rem;color:var(--muted);align-items:center}
+.nav-links a{transition:color 0.2s;padding:0.3rem 0;border-bottom:2px solid transparent}
+.nav-links a:hover,.nav-links a.active{color:var(--text);border-color:var(--gold)}
+.nav-right{display:flex;gap:0.8rem;align-items:center}
+.btn-wa{background:var(--wa);color:#fff;padding:0.5rem 1.2rem;border-radius:8px;font-weight:600;font-size:0.85rem;display:flex;align-items:center;gap:6px;cursor:pointer;border:none;transition:opacity 0.2s}
+.btn-wa:hover{opacity:0.9}
+.wa-icon{width:16px;height:16px;fill:white}
+
+/* ── PAGE SYSTEM ── */
+.page{display:none;min-height:100vh}
+.page.active{display:block}
+
+/* ── SECTIONS ── */
+section{padding:5.5rem 6%;position:relative}
+.s-label{display:inline-flex;align-items:center;gap:6px;font-size:0.75rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.s-label::before{content:'';display:inline-block;width:20px;height:2px;background:var(--gold)}
+h1{font-family:var(--font-h);font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:700;line-height:1.05;letter-spacing:-1.5px}
+h2{font-family:var(--font-h);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;letter-spacing:-1px;line-height:1.1}
+h3{font-family:var(--font-h);font-size:1.15rem;font-weight:600}
+.highlight{color:var(--gold)}
+.muted{color:var(--muted)}
+hr.div{border:none;border-top:1px solid var(--border);margin:0}
+
+/* ── BUTTONS ── */
+.btn-gold{background:var(--gold);color:#000;padding:0.85rem 2.2rem;border-radius:10px;font-weight:700;font-size:0.95rem;cursor:pointer;border:none;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--text);padding:0.85rem 2.2rem;border-radius:10px;font-weight:500;font-size:0.95rem;cursor:pointer;border:1px solid var(--border2);transition:all 0.2s;display:inline-flex;align-items:center;gap:8px}
+.btn-ghost:hover{border-color:var(--muted)}
+.btn-whatsapp{background:var(--wa);color:#fff;padding:0.85rem 2.2rem;border-radius:10px;font-weight:700;font-size:0.95rem;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s}
+.btn-whatsapp:hover{opacity:0.9;transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{padding:6rem 6% 4rem;overflow:hidden;position:relative}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-orb{position:absolute;top:-200px;right:-100px;width:700px;height:700px;background:radial-gradient(circle,rgba(245,166,35,0.07) 0%,transparent 65%);pointer-events:none}
+.hero-orb2{position:absolute;bottom:-100px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(91,141,239,0.06) 0%,transparent 65%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(245,166,35,0.08);border:1px solid rgba(245,166,35,0.25);color:var(--gold);padding:0.4rem 1rem;border-radius:50px;font-size:0.78rem;font-weight:600;letter-spacing:0.5px;margin-bottom:1.5rem}
+.hero-badge::before{content:'';width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,214,143,0.5)}50%{box-shadow:0 0 0 6px rgba(0,214,143,0)}}
+.hero-sub{color:var(--muted);font-size:1.1rem;margin:1.2rem 0 2.2rem;max-width:540px;line-height:1.7}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.hero-note{font-size:0.8rem;color:var(--muted);margin-top:1rem}
+.hero-note span{color:var(--green)}
+.hero-visual{position:relative}
+.hero-card{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:1.5rem;margin-bottom:1rem}
+.metric-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem}
+.metric-label{font-size:0.8rem;color:var(--muted)}
+.metric-up{color:var(--green);font-size:0.8rem;font-weight:600}
+.big-metric{font-family:var(--font-h);font-size:2.2rem;font-weight:700;color:var(--gold)}
+.mini-bar-wrap{display:flex;gap:4px;margin-top:0.8rem}
+.mini-bar{flex:1;border-radius:4px;background:rgba(245,166,35,0.15)}
+.mini-bar.filled{background:var(--gold)}
+.rank-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,214,143,0.1);border:1px solid rgba(0,214,143,0.25);color:var(--green);padding:0.5rem 1rem;border-radius:8px;font-size:0.85rem;font-weight:600;margin-top:0.8rem}
+.floating-card{background:var(--card2);border:1px solid var(--border2);border-radius:12px;padding:1rem 1.2rem;display:flex;align-items:center;gap:0.8rem}
+.fc-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.fc-num{font-family:var(--font-h);font-size:1.2rem;font-weight:700}
+.fc-label{font-size:0.78rem;color:var(--muted)}
+
+/* ── STATS BAND ── */
+.stats-band{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2.5rem 6%;display:flex;justify-content:space-around;flex-wrap:wrap;gap:2rem}
+.stat-item{text-align:center}
+.stat-num{font-family:var(--font-h);font-size:2rem;font-weight:700;color:var(--gold)}
+.stat-sub{font-size:0.82rem;color:var(--muted);margin-top:0.2rem}
+
+/* ── SERVICES ── */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+@media(max-width:900px){.services-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.services-grid{grid-template-columns:1fr}}
+.svc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.8rem;transition:all 0.25s;position:relative;overflow:hidden}
+.svc::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(245,166,35,0.04) 0%,transparent 60%);opacity:0;transition:opacity 0.3s}
+.svc:hover{border-color:var(--border2);transform:translateY(-4px)}
+.svc:hover::before{opacity:1}
+.svc-num{font-family:var(--font-h);font-size:0.7rem;font-weight:700;color:var(--gold);letter-spacing:2px;margin-bottom:1.2rem;opacity:0.7}
+.svc-emoji{font-size:2rem;margin-bottom:1rem}
+.svc p{color:var(--muted);font-size:0.88rem;margin-top:0.5rem;line-height:1.65}
+.svc-tags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:1rem}
+.stag{background:rgba(255,255,255,0.04);border:1px solid var(--border2);color:var(--muted);font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:4px}
+
+/* ── PRICING ── */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:0.5rem}
+@media(max-width:800px){.pricing-grid{grid-template-columns:1fr}}
+.price-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2.2rem;position:relative;transition:transform 0.2s}
+.price-card.popular{border-color:var(--gold);background:linear-gradient(160deg,rgba(245,166,35,0.06) 0%,var(--card) 50%)}
+.price-card:hover{transform:translateY(-4px)}
+.pop-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold);color:#000;font-size:0.7rem;font-weight:700;padding:0.28rem 1rem;border-radius:20px;letter-spacing:1px;white-space:nowrap}
+.plan-name{font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem}
+.plan-price{font-family:var(--font-h);font-size:3rem;font-weight:700;line-height:1;margin-bottom:0.2rem}
+.plan-price sup{font-size:1.3rem;vertical-align:top;margin-top:0.5rem;display:inline-block}
+.plan-period{color:var(--muted);font-size:0.82rem;margin-bottom:1.5rem}
+.plan-desc{color:var(--muted);font-size:0.88rem;margin-bottom:1.5rem;line-height:1.6;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:0.75rem;margin-bottom:2rem}
+.plan-features li{font-size:0.88rem;display:flex;align-items:flex-start;gap:0.7rem;color:var(--muted)}
+.plan-features li::before{content:'✓';color:var(--green);font-weight:700;font-size:0.82rem;flex-shrink:0;margin-top:2px}
+.plan-features li.bold{color:var(--text);font-weight:500}
+.plan-cta{width:100%;padding:0.9rem;border-radius:10px;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.2s;border:none;display:flex;align-items:center;justify-content:center;gap:8px}
+.cta-ghost{background:transparent;border:1px solid var(--border2);color:var(--text)}
+.cta-ghost:hover{border-color:var(--muted)}
+.cta-gold{background:var(--gold);color:#000}
+.cta-gold:hover{background:var(--gold2)}
+.cta-wa{background:var(--wa);color:#fff}
+.cta-wa:hover{opacity:0.9}
+.payment-methods{margin-top:2rem;background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
+.pay-title{font-size:0.82rem;color:var(--muted);font-weight:600;margin-bottom:1rem;letter-spacing:0.5px}
+.pay-pills{display:flex;flex-wrap:wrap;gap:0.6rem}
+.pay-pill{background:rgba(255,255,255,0.04);border:1px solid var(--border2);color:var(--muted);font-size:0.75rem;padding:0.35rem 0.8rem;border-radius:6px;display:flex;align-items:center;gap:5px}
+
+/* ── SEO AI PAGE ── */
+.seo-hero{padding:5rem 6%;background:linear-gradient(180deg,rgba(91,141,239,0.05) 0%,transparent 100%)}
+.seo-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.checklist-visual{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:2rem}
+.check-item{display:flex;align-items:flex-start;gap:1rem;padding:0.9rem;border-radius:10px;margin-bottom:0.6rem;transition:background 0.2s}
+.check-item:hover{background:rgba(255,255,255,0.03)}
+.check-box{width:22px;height:22px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.8rem;margin-top:1px}
+.check-yes{background:rgba(0,214,143,0.15);border:1px solid rgba(0,214,143,0.3);color:var(--green)}
+.check-no{background:rgba(255,77,106,0.12);border:1px solid rgba(255,77,106,0.25);color:var(--red)}
+.check-text{font-size:0.88rem}
+.check-sub{font-size:0.78rem;color:var(--muted);margin-top:0.2rem}
+.ai-comparison{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
+.comp-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem}
+.comp-card.bad{border-color:rgba(255,77,106,0.2)}
+.comp-card.good{border-color:rgba(0,214,143,0.2)}
+.comp-title{font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.2rem;padding:0.4rem 0.8rem;border-radius:6px;display:inline-block}
+.bad-title{background:rgba(255,77,106,0.1);color:var(--red)}
+.good-title{background:rgba(0,214,143,0.1);color:var(--green)}
+.comp-list{list-style:none;display:flex;flex-direction:column;gap:0.7rem}
+.comp-list li{font-size:0.88rem;display:flex;align-items:flex-start;gap:0.6rem;color:var(--muted)}
+
+/* ── CONTENT PAGE ── */
+.content-hero{padding:5rem 6%}
+.big-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin:3rem 0}
+.big-stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;text-align:center;position:relative;overflow:hidden}
+.big-stat-num{font-family:var(--font-h);font-size:3.5rem;font-weight:700;color:var(--gold);line-height:1}
+.big-stat-unit{font-family:var(--font-h);font-size:1.8rem;font-weight:700;color:var(--gold)}
+.big-stat-sub{color:var(--muted);font-size:0.85rem;margin-top:0.5rem;line-height:1.5}
+.content-types{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:2rem}
+.ct-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;transition:all 0.2s}
+.ct-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+.ct-icon{font-size:2.2rem;margin-bottom:0.8rem}
+.ct-label{font-weight:600;font-size:0.95rem;margin-bottom:0.3rem}
+.ct-desc{font-size:0.8rem;color:var(--muted)}
+
+/* ── AI TOOLS PAGE ── */
+.ai-tools-hero{padding:5rem 6%}
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+@media(max-width:900px){.tools-grid{grid-template-columns:1fr 1fr}}
+.tool-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.25s;cursor:pointer}
+.tool-card:hover{border-color:var(--border2);transform:translateY(-4px)}
+.tool-header{padding:1.5rem;border-bottom:1px solid var(--border)}
+.tool-icon-wrap{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1rem}
+.tool-body{padding:1.5rem}
+.tool-body p{font-size:0.88rem;color:var(--muted);line-height:1.65;margin-bottom:1.2rem}
+.tool-cta{font-size:0.82rem;font-weight:600;color:var(--gold);display:flex;align-items:center;gap:4px}
+.receptionist-demo{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:2.5rem;margin-top:3rem}
+.demo-header{display:flex;align-items:center;gap:0.8rem;margin-bottom:1.5rem}
+.demo-avatar{width:44px;height:44px;background:linear-gradient(135deg,var(--gold),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.demo-name{font-weight:600;font-size:0.95rem}
+.demo-status{font-size:0.78rem;color:var(--green);display:flex;align-items:center;gap:4px}
+.demo-status::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+.chat-bubble{max-width:75%;padding:0.8rem 1.1rem;border-radius:12px;margin-bottom:0.8rem;font-size:0.88rem;line-height:1.6}
+.bot-bubble{background:var(--card2);border:1px solid var(--border);border-radius:12px 12px 12px 4px}
+.user-bubble{background:rgba(245,166,35,0.12);border:1px solid rgba(245,166,35,0.2);margin-left:auto;border-radius:12px 12px 4px 12px;text-align:right}
+.chat-quick{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:0.5rem}
+.q-btn{background:rgba(91,141,239,0.1);border:1px solid rgba(91,141,239,0.25);color:var(--accent);font-size:0.78rem;padding:0.35rem 0.8rem;border-radius:6px;cursor:pointer;transition:all 0.2s}
+.q-btn:hover{background:rgba(91,141,239,0.2)}
+
+/* ── WA FLOAT ── */
+.wa-float{position:fixed;bottom:2rem;right:2rem;background:var(--wa);color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;z-index:500;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:transform 0.2s;text-decoration:none}
+.wa-float:hover{transform:scale(1.1)}
+.wa-float-label{position:absolute;right:68px;background:var(--card);border:1px solid var(--border2);color:var(--text);font-size:0.78rem;padding:0.4rem 0.8rem;border-radius:8px;white-space:nowrap;opacity:0;transition:opacity 0.2s;pointer-events:none}
+.wa-float:hover .wa-float-label{opacity:1}
+
+/* ── FOOTER ── */
+footer{background:var(--card);border-top:1px solid var(--border);padding:4rem 6% 2rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+@media(max-width:800px){.footer-grid{grid-template-columns:1fr 1fr}}
+.footer-logo-text{color:var(--muted);font-size:0.88rem;margin-top:0.8rem;max-width:260px;line-height:1.7}
+.footer-col h4{font-size:0.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem}
+.footer-col a{display:block;font-size:0.88rem;color:var(--muted);margin-bottom:0.6rem;transition:color 0.2s}
+.footer-col a:hover{color:var(--text)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-bottom p{color:var(--muted);font-size:0.8rem}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:6rem;right:2rem;background:var(--wa);color:#fff;padding:0.9rem 1.5rem;border-radius:10px;font-weight:600;font-size:0.88rem;z-index:999;transform:translateY(60px);opacity:0;transition:all 0.4s;display:flex;align-items:center;gap:0.6rem}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.page.active>*{animation:fadeUp 0.4s ease both}
+.page.active>*:nth-child(2){animation-delay:0.05s}
+.page.active>*:nth-child(3){animation-delay:0.1s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-grid,.seo-hero-grid{grid-template-columns:1fr}
+  .hero-visual{display:none}
+  .pricing-grid,.big-stats,.ai-comparison{grid-template-columns:1fr}
+  .content-types{grid-template-columns:1fr 1fr}
+  .tools-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo" onclick="showPage('home')" style="cursor:pointer">
+    <div class="logo-icon">⚡</div>
+    Rank<span>Boost</span>
+  </div>
+  <div class="nav-links">
+    <a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a>
+    <a href="#" onclick="showPage('seo-ai')" id="nav-seo-ai">SEO & AI</a>
+    <a href="#" onclick="showPage('content')" id="nav-content">Content Growth</a>
+    <a href="#" onclick="showPage('ai-tools')" id="nav-ai-tools">AI Tools</a>
+    <a href="#" onclick="showPage('home');setTimeout(()=>scrollToSection('pricing'),300)" id="nav-pricing">Pricing</a>
+  </div>
+  <div class="nav-right">
+    <a class="btn-wa" href="https://wa.me/918618486352?text=Hi%2C%20I%27m%20interested%20in%20RankBoost%20services" target="_blank">
+      <svg class="wa-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Chat on WhatsApp
+    </a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════ PAGE: HOME ═══════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-orb"></div>
+    <div class="hero-orb2"></div>
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">🇮🇳 Hyderabad's #1 Growth Agency</div>
+        <h1>Rank Higher.<br/>Generate <span class="highlight">Real Leads.</span><br/>Get Paid Faster.</h1>
+        <p class="hero-sub">SEO, lead generation, content, AI tools, and payment collection — all built for Indian businesses that want actual results, not empty promises.</p>
+        <div class="hero-btns">
+          <a href="https://wa.me/918618486352?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20packages" target="_blank" class="btn-whatsapp">
+            <svg style="width:18px;height:18px;fill:white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Start on WhatsApp
+          </a>
+          <button class="btn-ghost" onclick="showPage('seo-ai')">See How It Works →</button>
+        </div>
+        <p class="hero-note"><span>✓</span> No contracts &nbsp;·&nbsp; <span>✓</span> Results in 30 days &nbsp;·&nbsp; <span>✓</span> Cancel anytime</p>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="metric-row">
+            <span class="metric-label">Organic Traffic Growth</span>
+            <span class="metric-up">↑ +183% this month</span>
+          </div>
+          <div class="big-metric">18,420</div>
+          <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">Monthly visitors</div>
+          <div class="mini-bar-wrap">
+            <div class="mini-bar" style="height:20px"></div>
+            <div class="mini-bar filled" style="height:28px"></div>
+            <div class="mini-bar" style="height:16px"></div>
+            <div class="mini-bar filled" style="height:35px"></div>
+            <div class="mini-bar filled" style="height:42px"></div>
+            <div class="mini-bar filled" style="height:50px"></div>
+            <div class="mini-bar filled" style="height:60px"></div>
+          </div>
+          <div class="rank-badge">🥇 Ranking #1 for "best dentist Hyderabad"</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem">
+          <div class="floating-card">
+            <div class="fc-icon" style="background:rgba(0,214,143,0.12);color:var(--green)">📥</div>
+            <div><div class="fc-num">247</div><div class="fc-label">Leads this month</div></div>
+          </div>
+          <div class="floating-card">
+            <div class="fc-icon" style="background:rgba(245,166,35,0.12);color:var(--gold)">⭐</div>
+            <div><div class="fc-num">4.9★</div><div class="fc-label">Google Rating</div></div>
+          </div>
+          <div class="floating-card">
+            <div class="fc-icon" style="background:rgba(37,211,102,0.12);color:var(--wa)">💳</div>
+            <div><div class="fc-num">₹2.4L</div><div class="fc-label">Collected online</div></div>
+          </div>
+          <div class="floating-card">
+            <div class="fc-icon" style="background:rgba(91,141,239,0.12);color:var(--accent)">🤖</div>
+            <div><div class="fc-num">98%</div><div class="fc-label">AI response rate</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAND -->
+  <div class="stats-band">
+    <div class="stat-item"><div class="stat-num">500+</div><div class="stat-sub">Businesses Served</div></div>
+    <div class="stat-item"><div class="stat-num">2.3x</div><div class="stat-sub">Avg Follower Growth</div></div>
+    <div class="stat-item"><div class="stat-num">87%</div><div class="stat-sub">See Results in 30 Days</div></div>
+    <div class="stat-item"><div class="stat-num">1%</div><div class="stat-sub">Cost vs Agencies</div></div>
+    <div class="stat-item"><div class="stat-num">₹0</div><div class="stat-sub">Setup Fee</div></div>
+  </div>
+
+  <hr class="div"/>
+
+  <!-- SERVICES -->
+  <section>
+    <div class="s-label">What We Do</div>
+    <h2 style="margin-bottom:0.5rem">Everything your business needs <br/>to <span class="highlight">dominate online</span></h2>
+    <p class="muted" style="margin-bottom:2.5rem;max-width:520px">From SEO to AI receptionists — we build and run your entire digital growth engine.</p>
+    <div class="services-grid">
+      <div class="svc"><div class="svc-num">01</div><div class="svc-emoji">🔍</div><h3>AI-Powered SEO</h3><p>We optimize your site using AI tools that analyze search intent, fix technical issues, and build backlinks that actually rank you in 2025's search landscape.</p><div class="svc-tags"><span class="stag">AI SEO Audit</span><span class="stag">Schema Markup</span><span class="stag">Local SEO</span><span class="stag">Backlinks</span></div></div>
+      <div class="svc"><div class="svc-num">02</div><div class="svc-emoji">🎯</div><h3>Lead Generation</h3><p>We run Google Ads, Meta Ads, and SEO campaigns that bring high-intent visitors ready to buy. Every lead captured and tracked with real ROI.</p><div class="svc-tags"><span class="stag">Google Ads</span><span class="stag">Meta Ads</span><span class="stag">Landing Pages</span></div></div>
+      <div class="svc"><div class="svc-num">03</div><div class="svc-emoji">⚡</div><h3>Lead Conversion</h3><p>Automated WhatsApp follow-ups, smart CRM, and AI chatbots that convert your enquiries into paying customers — 24/7, without hiring staff.</p><div class="svc-tags"><span class="stag">WhatsApp Bot</span><span class="stag">CRM</span><span class="stag">Auto Follow-up</span></div></div>
+      <div class="svc"><div class="svc-num">04</div><div class="svc-emoji">⭐</div><h3>Google Ratings Boost</h3><p>Automated SMS/WhatsApp review requests after every sale. AI-generated responses to all reviews. Watch your star rating climb within weeks.</p><div class="svc-tags"><span class="stag">Review Automation</span><span class="stag">GMB Mgmt</span><span class="stag">Reputation</span></div></div>
+      <div class="svc"><div class="svc-num">05</div><div class="svc-emoji">💳</div><h3>Payment Collection</h3><p>Accept UPI, cards, net banking, and EMI directly from your WhatsApp, website, or landing page. Instant settlement, zero setup cost.</p><div class="svc-tags"><span class="stag">Razorpay</span><span class="stag">UPI</span><span class="stag">WhatsApp Pay</span><span class="stag">EMI</span></div></div>
+      <div class="svc"><div class="svc-num">06</div><div class="svc-emoji">🤖</div><h3>AI Receptionist</h3><p>We build a custom AI receptionist for your business that handles calls, chats, booking, FAQs and lead capture — trained on your business data.</p><div class="svc-tags"><span class="stag">ChatBot</span><span class="stag">Voice AI</span><span class="stag">Booking System</span></div></div>
+    </div>
+  </section>
+
+  <hr class="div"/>
+
+  <!-- HOW WA WORKS -->
+  <section style="background:rgba(37,211,102,0.03)">
+    <div class="s-label">How It Works</div>
+    <h2 style="margin-bottom:0.5rem">Contact. Pay. We <span class="highlight">Start Immediately.</span></h2>
+    <p class="muted" style="margin-bottom:3rem">No long sales calls. No complicated onboarding. Just 3 simple steps.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;position:relative">
+      <div style="position:absolute;top:30px;left:calc(33% + 10px);right:calc(33% + 10px);height:1px;background:linear-gradient(90deg,var(--wa),var(--wa));opacity:0.3;display:block"></div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;text-align:center">
+        <div style="width:56px;height:56px;background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto 1rem">💬</div>
+        <div style="font-family:var(--font-h);font-size:0.7rem;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:0.5rem">STEP 01</div>
+        <h3 style="margin-bottom:0.5rem">WhatsApp Us</h3>
+        <p style="font-size:0.88rem;color:var(--muted)">Message us on WhatsApp. Tell us your business type and goal. We'll reply within 30 minutes.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;text-align:center">
+        <div style="width:56px;height:56px;background:rgba(245,166,35,0.12);border:1px solid rgba(245,166,35,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto 1rem">💳</div>
+        <div style="font-family:var(--font-h);font-size:0.7rem;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:0.5rem">STEP 02</div>
+        <h3 style="margin-bottom:0.5rem">Choose & Pay</h3>
+        <p style="font-size:0.88rem;color:var(--muted)">Pick Starter (₹8,000) or Growth (₹13,000). Pay via UPI, card, or net banking — instantly via payment link.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;text-align:center">
+        <div style="width:56px;height:56px;background:rgba(91,141,239,0.12);border:1px solid rgba(91,141,239,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto 1rem">🚀</div>
+        <div style="font-family:var(--font-h);font-size:0.7rem;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:0.5rem">STEP 03</div>
+        <h3 style="margin-bottom:0.5rem">We Go Live</h3>
+        <p style="font-size:0.88rem;color:var(--muted)">Onboarding starts same day. SEO, Ads, and automation go live within 48 hours. You see results in 30 days.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3rem">
+      <a href="https://wa.me/918618486352?text=Hi%2C%20I%27d%20like%20to%20get%20started%20with%20RankBoost" target="_blank" class="btn-whatsapp" style="font-size:1.05rem;padding:1rem 2.5rem">
+        <svg style="width:20px;height:20px;fill:white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp +91 86184 86352
+      </a>
+    </div>
+  </section>
+
+  <hr class="div"/>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="s-label">Pricing</div>
+    <h2 style="margin-bottom:0.5rem">Simple pricing. <span class="highlight">Real results.</span></h2>
+    <p class="muted" style="margin-bottom:3rem">Pay via WhatsApp. No hidden fees. No lock-in contracts.</p>
+    <div class="pricing-grid">
+      <!-- STARTER -->
+      <div class="price-card">
+        <div class="plan-name">Starter Pack</div>
+        <div class="plan-price"><sup>₹</sup>8,000</div>
+        <div class="plan-period">per month</div>
+        <p class="plan-desc">Perfect for small businesses and new startups looking to build their digital presence and start getting leads online.</p>
+        <ul class="plan-features">
+          <li class="bold">SEO Optimization (On-Page)</li>
+          <li>Google Business Profile Setup</li>
+          <li>10 Directory Submissions</li>
+          <li>Basic Lead Capture Landing Page</li>
+          <li>WhatsApp Business Setup</li>
+          <li>Review Request Automation (SMS)</li>
+          <li>Monthly Performance Report</li>
+          <li>Email & Chat Support</li>
+        </ul>
+        <a href="https://wa.me/918618486352?text=Hi%2C%20I%27m%20interested%20in%20the%20Starter%20Pack%20at%20%E2%82%B98%2C000" target="_blank" class="plan-cta cta-wa">
+          <svg style="width:16px;height:16px;fill:white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Buy on WhatsApp — ₹8,000
+        </a>
+      </div>
+
+      <!-- GROWTH (POPULAR) -->
+      <div class="price-card popular">
+        <div class="pop-badge">⭐ MOST POPULAR</div>
+        <div class="plan-name">Growth Pack</div>
+        <div class="plan-price"><sup>₹</sup>13,000</div>
+        <div class="plan-period">per month</div>
+        <p class="plan-desc">For businesses serious about growth — full SEO, paid ads, lead automation, and payment collection all handled for you.</p>
+        <ul class="plan-features">
+          <li class="bold">Everything in Starter +</li>
+          <li class="bold">Google Ads Campaign Management</li>
+          <li class="bold">Meta (Facebook/Instagram) Ads</li>
+          <li>AI WhatsApp Lead Follow-up Bot</li>
+          <li>CRM Setup & Lead Tracking</li>
+          <li>50+ Directory Submissions</li>
+          <li>Payment Gateway Integration (UPI/Cards)</li>
+          <li>AI Review Response System</li>
+          <li>Weekly Strategy Call</li>
+          <li>Priority WhatsApp Support</li>
+        </ul>
+        <a href="https://wa.me/918618486352?text=Hi%2C%20I%27m%20interested%20in%20the%20Growth%20Pack%20at%20%E2%82%B913%2C000" target="_blank" class="plan-cta cta-wa">
+          <svg style="width:16px;height:16px;fill:white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Buy on WhatsApp — ₹13,000
+        </a>
+      </div>
+
+      <!-- ENTERPRISE -->
+      <div class="price-card">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-price" style="font-size:2rem;padding-top:0.4rem">Custom</div>
+        <div class="plan-period">tailored to your needs</div>
+        <p class="plan-desc">For large businesses, agencies, and multi-location brands that need a fully custom growth stack with AI receptionist and tools.</p>
+        <ul class="plan-features">
+          <li class="bold">Everything in Growth +</li>
+          <li>Custom AI Receptionist Build</li>
+          <li>Multi-location SEO</li>
+          <li>Custom AI Tools for Your Business</li>
+          <li>Dedicated Account Manager</li>
+          <li>24/7 Priority Support</li>
+          <li>API & CRM Integrations</li>
+          <li>SLA & Performance Guarantee</li>
+        </ul>
+        <a href="https://wa.me/918618486352?text=Hi%2C%20I%27m%20interested%20in%20Enterprise%20services.%20Please%20share%20pricing." target="_blank" class="plan-cta cta-ghost">
+          Talk to Us on WhatsApp →
+        </a>
+      </div>
+    </div>
+
+    <!-- PAYMENT METHODS -->
+    <div class="payment-methods">
+      <div class="pay-title">ACCEPTED PAYMENT METHODS — PAY DIRECTLY VIA WHATSAPP LINK</div>
+      <div class="pay-pills">
+        <span class="pay-pill">📱 UPI / GPay / PhonePe</span>
+        <span class="pay-pill">💳 Visa / Mastercard</span>
+        <span class="pay-pill">🏦 Net Banking</span>
+        <span class="pay-pill">🔵 Razorpay</span>
+        <span class="pay-pill">💰 PayU</span>
+        <span class="pay-pill">📦 EMI (3–12 months)</span>
+        <span class="pay-pill">🏪 Paytm Wallet</span>
+        <span class="pay-pill">⚡ Instant Payment Link</span>
+        <span class="pay-pill">🧾 GST Invoice Included</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="div"/>
+
+  <!-- CTA BOTTOM -->
+  <section style="text-align:center;padding:5rem 6%">
+    <div class="s-label" style="justify-content:center">Get Started Today</div>
+    <h2 style="margin-bottom:1rem">Ready to grow your business?</h2>
+    <p class="muted" style="max-width:480px;margin:0 auto 2.5rem">Message us on WhatsApp right now. We'll send you a custom plan and payment link within 30 minutes.</p>
+    <a href="https://wa.me/918618486352?text=Hi%20RankBoost%2C%20I%20want%20to%20grow%20my%20business.%20Please%20share%20details." target="_blank" class="btn-whatsapp" style="font-size:1.1rem;padding:1.1rem 3rem">
+      <svg style="width:22px;height:22px;fill:white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Chat Now: +91 86184 86352
+    </a>
+    <p class="muted" style="margin-top:1rem;font-size:0.82rem">Mon–Sat 9am–8pm IST · Response within 30 min</p>
+  </section>
+</div>
+
+<!-- ═══════════════════ PAGE: SEO IN THE AGE OF AI ═══════════════════ -->
+<div class="page" id="page-seo-ai">
+  <section class="seo-hero">
+    <div class="s-label">SEO in the Age of AI</div>
+    <h1 style="max-width:700px;margin-bottom:1.2rem">Are you still doing SEO<br/><span class="highlight">the old way?</span></h1>
+    <p class="muted" style="max-width:580px;font-size:1.05rem;margin-bottom:3rem">Google's AI Overviews, SGE, and machine learning have completely changed how rankings work. Here's your ultimate checklist to find out where you stand — and how to fix it.</p>
+    <div class="seo-hero-grid">
+      <div>
+        <h3 style="margin-bottom:1.5rem;font-family:var(--font-h)">Old SEO vs AI-Era SEO — Where Are You?</h3>
+        <div class="checklist-visual">
+          <div class="check-item"><div class="check-box check-no">✗</div><div><div class="check-text">Stuffing keywords into every paragraph</div><div class="check-sub">Google's NLP now reads for meaning, not keyword density</div></div></div>
+          <div class="check-item"><div class="check-box check-no">✗</div><div><div class="check-text">Buying 100s of random backlinks</div><div class="check-sub">AI link quality scoring penalizes low-relevance links</div></div></div>
+          <div class="check-item"><div class="check-box check-no">✗</div><div><div class="check-text">Writing for Google bots, not humans</div><div class="check-sub">RankBrain and BERT reward user satisfaction signals</div></div></div>
+          <div class="check-item"><div class="check-box check-no">✗</div><div><div class="check-text">Ignoring Core Web Vitals</div><div class="check-sub">Page speed and UX are now direct ranking factors</div></div></div>
+          <div class="check-item"><div class="check-box check-yes">✓</div><div><div class="check-text">Optimizing for AI Overviews (SGE)</div><div class="check-sub">Structured data + authoritative content gets featured</div></div></div>
+          <div class="check-item"><div class="check-box check-yes">✓</div><div><div class="check-text">Building topical authority with content clusters</div><div class="check-sub">AI rewards sites that own a topic end-to-end</div></div></div>
+          <div class="check-item"><div class="check-box check-yes">✓</div><div><div class="check-text">E-E-A-T signals (Experience, Expertise, Trust)</div><div class="check-sub">Author credentials and business signals matter more</div></div></div>
+          <div class="check-item"><div class="check-box check-yes">✓</div><div><div class="check-text">Voice & conversational search optimization</div><div class="check-sub">30% of searches are now voice — are you showing up?</div></div></div>
+        </div>
+      </div>
+      <div>
+        <div style="background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:2rem;margin-bottom:1.5rem">
+          <h3 style="margin-bottom:1.2rem">AI SEO Audit Score</h3>
+          <div style="display:flex;flex-direction:column;gap:0.8rem">
+            <div><div style="display:flex;justify-content:space-between;font-size:0.82rem;color:var(--muted);margin-bottom:0.4rem"><span>Technical SEO</span><span style="color:var(--green)">92/100</span></div><div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px"><div style="width:92%;height:100%;background:var(--green);border-radius:3px"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:0.82rem;color:var(--muted);margin-bottom:0.4rem"><span>Content Quality</span><span style="color:var(--gold)">78/100</span></div><div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px"><div style="width:78%;height:100%;background:var(--gold);border-radius:3px"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:0.82rem;color:var(--muted);margin-bottom:0.4rem"><span>Backlink Profile</span><span style="color:var(--gold)">65/100</span></div><div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px"><div style="width:65%;height:100%;background:var(--gold);border-radius:3px"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:0.82rem;color:var(--muted);margin-bottom:0.4rem"><span>Core Web Vitals</span><span style="color:var(--green)">88/100</span></div><div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px"><div style="width:88%;height:100%;background:var(--green);border-radius:3px"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:0.82rem;color:var(--muted);margin-bottom:0.4rem"><span>AI Readiness (SGE)</span><span style="color:var(--red)">42/100</span></div><div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px"><div style="width:42%;height:100%;background:var(--red);border-radius:3px"></div></div></div>
+          </div>
+          <div style="margin-top:1.5rem;padding:1rem;background:rgba(255,77,106,0.08);border:1px solid rgba(255,77,106,0.2);border-radius:8px;font-size:0.85rem;color:var(--muted)">⚠️ Your AI readiness score is low. Most traffic could shift to AI Overviews — you need to optimize for SGE now.</div>
+        </div>
+        <a href="https://wa.me/918618486352?text=Hi%2C%20I%20want%20a%20free%20AI%20SEO%20audit%20for%20my%20website" target="_blank" class="btn-whatsapp" style="width:100%;justify-content:center">Get Your Free AI SEO Audit</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="div"/>
+
+  <section>
+    <div class="s-label">Our Approach</div>
+    <h2 style="margin-bottom:2.5rem">Old SEO is <span class="highlight">dead.</span> Here's the new way.</h2>
+    <div class="ai-comparison">
+      <div class="comp-card bad">
+        <span class="comp-title bad-title">❌ Old SEO (Doesn't Work)</span>
+        <ul class="comp-list">
+          <li>📛 Keyword stuffing in meta tags</li>
+          <li>📛 Buying cheap backlinks in bulk</li>
+          <li>📛 Thin AI-generated content</li>
+          <li>📛 Ignoring mobile experience</li>
+          <li>📛 No schema / structured data</li>
+          <li>📛 Writing for crawlers, not people</li>
+          <li>📛 Ignoring local search signals</li>
+          <li>📛 No E-E-A-T signals</li>
+        </ul>
+      </div>
+      <div class="comp-card good">
+        <span class="comp-title good-title">✅ AI-Era SEO (What Works Now)</span>
+        <ul class="comp-list" style="color:var(--text)">
+          <li>✓ Topical authority & content clusters</li>
+          <li>✓ Contextual, high-DR backlinks</li>
+          <li>✓ Human-first, experience-led content</li>
+          <li>✓ Core Web Vitals & mobile-first</li>
+          <li>✓ Full schema markup for AI features</li>
+          <li>✓ Conversational, question-answer format</li>
+          <li>✓ GMB + local citations for maps pack</li>
+          <li>✓ Author credentials & trust signals</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="div"/>
+  <section style="text-align:center;padding:4rem 6%">
+    <h2 style="margin-bottom:1rem">Ready to fix your SEO for the <span class="highlight">AI era?</span></h2>
+    <p class="muted" style="max-width:480px;margin:0 auto 2rem">We'll audit your site and show you exactly what to fix — free, on WhatsApp.</p>
+    <a href="https://wa.me/918618486352?text=Hi%2C%20I%20want%20an%20AI%20SEO%20audit" target="_blank" class="btn-whatsapp">Get Free SEO Audit on WhatsApp</a>
+  </section>
+</div>
+
+<!-- ═══════════════════ PAGE: CONTENT GROWTH ═══════════════════ -->
+<div class="page" id="page-content">
+  <section class="content-hero">
+    <div class="s-label">Content Growth</div>
+    <h1 style="max-width:720px;margin-bottom:1rem">Grow faster with <span class="highlight">content that converts</span></h1>
+    <p class="muted" style="font-size:1.05rem;max-width:560px">Social, blog, video, and newsletter — we create and distribute content that builds your audience and turns followers into customers.</p>
+
+    <div class="big-stats">
+      <div class="big-stat-card">
+        <div style="font-family:var(--font-h);color:var(--gold)"><span style="font-size:3rem;font-weight:700">2.3</span><span style="font-size:1.8rem;font-weight:700">x</span></div>
+        <div style="font-weight:600;margin-top:0.5rem">Follower Growth</div>
+        <div class="big-stat-sub">Top customers more than double their following in 30 days</div>
+      </div>
+      <div class="big-stat-card">
+        <div style="font-family:var(--font-h);color:var(--gold)"><span style="font-size:3rem;font-weight:700">87</span><span style="font-size:1.8rem;font-weight:700">%</span></div>
+        <div style="font-weight:600;margin-top:0.5rem">Audience Growth</div>
+        <div class="big-stat-sub">87% of customers see audience growth in their first 30 days</div>
+      </div>
+      <div class="big-stat-card">
+        <div style="font-family:var(--font-h);color:var(--gold)"><span style="font-size:3rem;font-weight:700">99</span><span style="font-size:1.8rem;font-weight:700">%</span></div>
+        <div style="font-weight:600;margin-top:0.5rem">Lower Cost vs Agencies</div>
+        <div class="big-stat-sub">Agency-level strategy, content, and insights for 1% of the price</div>
+      </div>
+    </div>
+
+    <h3 style="margin-bottom:1.5rem;font-family:var(--font-h)">Content types we create for you</h3>
+    <div class="content-types">
+      <div class="ct-card"><div class="ct-icon">📱</div><div class="ct-label">Social Media</div><div class="ct-desc">Instagram, Facebook, LinkedIn — daily posts, reels scripts, and carousel designs</div></div>
+      <div class="ct-card"><div class="ct-icon">✍️</div><div class="ct-label">Blog & SEO Articles</div><div class="ct-desc">Long-form, AI-optimized articles that rank on Google and drive organic traffic</div></div>
+      <div class="ct-card"><div class="ct-icon">🎬</div><div class="ct-label">Video Scripts</div><div class="ct-desc">YouTube, Reels, and Shorts scripts written to get views and drive conversions</div></div>
+      <div class="ct-card"><div class="ct-icon">📧</div><div class="ct-label">Newsletter & Email</div><div class="ct-desc">Weekly newsletters and email sequences that nurture leads and repeat customers</div></div>
+    </div>
+  </section>
+
+  <hr class="div"/>
+  <section>
+    <div class="s-label">Content Strategy</div>
+    <h2 style="margin-bottom:2rem">How we build your <span class="highlight">content engine</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.8rem">
+        <div style="font-family:var(--font-h);font-size:2.5rem;font-weight:700;color:var(--gold);margin-bottom:0.5rem">01</div>
+        <h3 style="margin-bottom:0.5rem">Audit</h3>
+        <p style="font-size:0.88rem;color:var(--muted)">We audit your current content, competitors, and audience to find high-opportunity gaps.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.8rem">
+        <div style="font-family:var(--font-h);font-size:2.5rem;font-weight:700;color:var(--gold);margin-bottom:0.5rem">02</div>
+        <h3 style="margin-bottom:0.5rem">Strategy</h3>
+        <p style="font-size:0.88rem;color:var(--muted)">Build a 30-day content calendar across all platforms tailored to your audience.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.8rem">
+        <div style="font-family:var(--font-h);font-size:2.5rem;font-weight:700;color:var(--gold);margin-bottom:0.5rem">03</div>
+        <h3 style="margin-bottom:0.5rem">Create</h3>
+        <p style="font-size:0.88rem;color:var(--muted)">Our team creates all content — copy, visuals, videos, blogs — ready to publish.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.8rem">
+        <div style="font-family:var(--font-h);font-size:2.5rem;font-weight:700;color:var(--gold);margin-bottom:0.5rem">04</div>
+        <h3 style="margin-bottom:0.5rem">Optimize</h3>
+        <p style="font-size:0.88rem;color:var(--muted)">We track what converts and double down — continuous improvement every week.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="div"/>
+  <section style="text-align:center;padding:4rem 6%">
+    <h2 style="margin-bottom:1rem">Start growing your audience <span class="highlight">this week</span></h2>
+    <p class="muted" style="max-width:400px;margin:0 auto 2rem">Included in Growth Pack (₹13,000/mo). Message us to get started.</p>
+    <a href="https://wa.me/918618486352?text=Hi%2C%20I%27m%20interested%20in%20the%20Content%20Growth%20service" target="_blank" class="btn-whatsapp">Chat on WhatsApp Now</a>
+  </section>
+</div>
+
+<!-- ═══════════════════ PAGE: AI TOOLS ═══════════════════ -->
+<div class="page" id="page-ai-tools">
+  <section class="ai-tools-hero">
+    <div class="s-label">AI Tools & Receptionist</div>
+    <h1 style="max-width:720px;margin-bottom:1rem">We build the <span class="highlight">AI tools</span><br/>your business needs</h1>
+    <p class="muted" style="font-size:1.05rem;max-width:600px;margin-bottom:3rem">From AI receptionists that handle calls and chats 24/7, to custom automation tools trained on your business — we build it all.</p>
+
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon-wrap" style="background:rgba(245,166,35,0.12)">🤖</div>
+          <h3>AI Receptionist</h3>
+          <p style="font-size:0.82rem;color:var(--muted);margin-top:0.3rem">Answers enquiries, books appointments, qualifies leads — 24/7</p>
+        </div>
+        <div class="tool-body">
+          <p>We train a custom AI assistant on your business — your services, pricing, FAQs, location, and team. It handles WhatsApp, website chat, and phone calls without any human needed.</p>
+          <div class="tool-cta">Learn More →</div>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon-wrap" style="background:rgba(91,141,239,0.12)">📊</div>
+          <h3>Lead Scoring AI</h3>
+          <p style="font-size:0.82rem;color:var(--muted);margin-top:0.3rem">Automatically prioritize your hottest leads</p>
+        </div>
+        <div class="tool-body">
+          <p>Our AI scores every inbound lead based on their behaviour, questions, and responses. Your sales team only calls the hottest prospects — never waste time on cold leads again.</p>
+          <div class="tool-cta">Learn More →</div>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon-wrap" style="background:rgba(0,214,143,0.12)">💬</div>
+          <h3>WhatsApp Follow-up Bot</h3>
+          <p style="font-size:0.82rem;color:var(--muted);margin-top:0.3rem">Never lose a lead to silence again</p>
+        </div>
+        <div class="tool-body">
+          <p>Automatically follow up with every lead via WhatsApp — instantly after enquiry, 24 hours later, and 7 days later. Personalised messages that feel human, sent automatically.</p>
+          <div class="tool-cta">Learn More →</div>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon-wrap" style="background:rgba(139,92,246,0.12)">⭐</div>
+          <h3>Review Automation</h3>
+          <p style="font-size:0.82rem;color:var(--muted);margin-top:0.3rem">Collect reviews on autopilot, boost your rating</p>
+        </div>
+        <div class="tool-body">
+          <p>After every sale or service, our system automatically sends a review request via SMS and WhatsApp. We also use AI to respond to every Google review on your behalf within minutes.</p>
+          <div class="tool-cta">Learn More →</div>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon-wrap" style="background:rgba(255,77,106,0.12)">📝</div>
+          <h3>AI Content Generator</h3>
+          <p style="font-size:0.82rem;color:var(--muted);margin-top:0.3rem">SEO blogs, social posts, ads — on demand</p>
+        </div>
+        <div class="tool-body">
+          <p>A custom content tool trained on your brand voice and industry. Generate blog posts, Instagram captions, Google Ad copy, and WhatsApp messages in seconds — all sounding like you.</p>
+          <div class="tool-cta">Learn More →</div>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon-wrap" style="background:rgba(245,166,35,0.12)">📈</div>
+          <h3>Analytics Dashboard</h3>
+          <p style="font-size:0.82rem;color:var(--muted);margin-top:0.3rem">All your metrics in one real-time view</p>
+        </div>
+        <div class="tool-body">
+          <p>Custom dashboard showing SEO rankings, lead count, conversion rate, review score, ad spend, and ROI — all in one place. Updated live, accessible from your phone anytime.</p>
+          <div class="tool-cta">Learn More →</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="div"/>
+
+  <section>
+    <div class="s-label">Live Demo</div>
+    <h2 style="margin-bottom:0.5rem">See the AI Receptionist <span class="highlight">in action</span></h2>
+    <p class="muted" style="margin-bottom:2rem">This is how it handles a real customer enquiry on WhatsApp — 24/7, no human needed.</p>
+    <div class="receptionist-demo">
+      <div class="demo-header">
+        <div class="demo-avatar">🤖</div>
+        <div>
+          <div class="demo-name">Riya — AI Receptionist (RankBoost)</div>
+          <div class="demo-status">Online now · replies instantly</div>
+        </div>
+      </div>
+      <div class="bot-bubble chat-bubble">👋 Hi! I'm Riya, the AI assistant for RankBoost. How can I help you today?</div>
+      <div class="chat-quick">
+        <span class="q-btn">Pricing</span>
+        <span class="q-btn">What services do you offer?</span>
+        <span class="q-btn">Book a call</span>
+        <span class="q-btn">Talk to a human</span>
+      </div>
+      <div style="margin-top:1rem">
+        <div class="user-bubble chat-bubble">What's included in the Growth Pack?</div>
+        <div class="bot-bubble chat-bubble" style="margin-top:0.8rem">Great choice! 💪 The Growth Pack at <strong>₹13,000/month</strong> includes:<br/><br/>✅ Full SEO + Google Ads management<br/>✅ Meta (Facebook + Instagram) Ads<br/>✅ AI WhatsApp follow-up bot<br/>✅ CRM setup & lead tracking<br/>✅ Payment gateway (UPI/Cards)<br/>✅ Review automation system<br/><br/>Ready to start? I can send you the payment link right now — takes 2 minutes to get going! 🚀</div>
+        <div class="user-bubble chat-bubble" style="margin-top:0.8rem">Yes, send me the payment link</div>
+        <div class="bot-bubble chat-bubble" style="margin-top:0.8rem">Perfect! 🎉 Here's your secure payment link for Growth Pack:<br/><br/>💳 <span style="color:var(--accent)">pay.rankboost.in/growth</span><br/><br/>Accepts UPI, cards, net banking & EMI. Once paid, our team starts your onboarding within 2 hours. Any questions? I'm here!</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem">
+      <a href="https://wa.me/918618486352?text=Hi%2C%20I%27m%20interested%20in%20getting%20an%20AI%20Receptionist%20built%20for%20my%20business" target="_blank" class="btn-whatsapp">Get an AI Receptionist for Your Business</a>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER (shown on all pages) -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="logo"><div class="logo-icon">⚡</div>Rank<span>Boost</span></div>
+      <p class="footer-logo-text">Hyderabad's #1 SEO, lead generation, and AI growth agency. We help businesses rank, grow, and get paid — faster.</p>
+      <div style="margin-top:1.2rem">
+        <a href="https://wa.me/918618486352" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--wa);color:#fff;padding:0.5rem 1rem;border-radius:8px;font-size:0.85rem;font-weight:600">
+          <svg style="width:14px;height:14px;fill:white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          +91 86184 86352
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#" onclick="showPage('seo-ai')">SEO & AI Audit</a>
+      <a href="#" onclick="showPage('content')">Content Growth</a>
+      <a href="#" onclick="showPage('ai-tools')">AI Receptionist</a>
+      <a href="#" onclick="showPage('home');setTimeout(()=>scrollToSection('pricing'),300)">Pricing</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Us</a>
+      <a href="#">Case Studies</a>
+      <a href="#">Blog</a>
+      <a href="#">Careers</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="https://wa.me/918618486352" target="_blank">WhatsApp Us</a>
+      <a href="#">Hyderabad Office</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 RankBoost Digital. All rights reserved. GST Registered · Hyderabad, India.</p>
+    <p>🔒 SSL Secured · ISO 27001 · Payments via Razorpay</p>
+  </div>
+</footer>
+
+<!-- FLOATING WA BUTTON -->
+<a class="wa-float" href="https://wa.me/918618486352?text=Hi%20RankBoost%21%20I%27d%20like%20to%20know%20more." target="_blank">
+  <span class="wa-float-label">Chat on WhatsApp</span>
+  <svg style="width:26px;height:26px;fill:white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<div class="toast" id="toast">✅ Opening WhatsApp...</div>
+
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  const pg=document.getElementById('page-'+id);
+  if(pg){pg.classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+  const nav=document.getElementById('nav-'+id);
+  if(nav)nav.classList.add('active');
+}
+function scrollToSection(id){
+  const el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
